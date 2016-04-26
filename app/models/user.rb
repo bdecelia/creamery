@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def role?(authorized_role)
-    return false if role.nil?
+    return false if self.employee.role.nil?
     role.to_sym == authorized_role
   end
 
