@@ -27,7 +27,4 @@ class User < ActiveRecord::Base
   def employee_is_active_in_system
     is_active_in_system(:employee)
   end
-
-
-
 end
