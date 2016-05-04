@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params)
       flash[:notice] = "Successfully updated #{@user.employee.name}'s account information."
-      redirect_to user_path(@user)
+      redirect_to home_path
     else
       render action: 'edit'
     end
@@ -48,11 +48,11 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    if current_user and not current_user.employee.nil? and current_user.employee.role?(:admin)
+    #if current_user and not current_user.employee.nil? and current_user.employee.role?(:admin)
       params.require(:user).permit(:employee_id, :email, :password, :password_confirmation)
-    else
-      params.require(:user).permit(:email, :password, :password_confirmation)
-    end
+    #else
+    #  params.require(:user).permit(:email, :password, :password_confirmation)
+    #end
   end
 
   def set_user

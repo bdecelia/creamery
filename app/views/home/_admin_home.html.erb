@@ -2,3 +2,7 @@
 <%= link_to(eval("new_assignment_path"), class: "button radius") do %>
   &nbsp;Add a New Assignment
 <% end %>
+<%= render partial: "employees/active_managers" %>
+<%= link_to(eval("assignments_path"), class: "button radius") do %>
+  &nbsp;Promote Somebody!
+<% end %>

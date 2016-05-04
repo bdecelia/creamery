@@ -7,8 +7,10 @@
       <tr>
         <th width="225">Store Name</th>
         <th width="225">Store Phone</th>
+        <% if logged_in? %>
         <th width="125">Staff Count</th>
         <th width="75">&nbsp;</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -17,8 +19,8 @@
         <tr>
           <td><%= link_to store.name, store_path(store) %></td>
           <td><%= number_to_phone store.phone %></td>
-          <td><%= store.assignments.current.count %></td> 
-          <% if can? :update, store %>     
+          <% if logged_in? %>
+          <td><%= store.assignments.current.count %></td>    
           <td>
             <%= link_to(edit_store_path(store), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;

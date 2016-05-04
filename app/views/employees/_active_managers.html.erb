@@ -1,7 +1,7 @@
-<% if @active_employees.nil? or @active_employees.empty? %>
+<% if @active_managers.nil? or @active_managers.empty? %>
   <p><em>There are no current employees at this time.</em></p>
 <% else %>
-  <h3>Current Employees</h3>
+  <h3>Current Managers</h3>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @active_employees.each do |employee| %>
+      <% @active_managers.each do |employee| %>
       <% if can? :read, employee %>
         <tr>
           <td><%= link_to employee.name, employee_path(employee) %></td>
@@ -38,6 +38,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @active_employees, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+  <%= will_paginate @active_managers, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
 
 <% end %>

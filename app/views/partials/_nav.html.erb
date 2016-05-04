@@ -93,10 +93,7 @@
               <li><%= link_to "Add a Flavor", new_flavor_path %></li>
             </ul>
           </li>
-        <% elsif can? :read, Flavor %>
-          <li>
-            <%= link_to "Flavors", flavors_path %>
-          </li>
+        
       <% end %>
       </ul>
 
@@ -104,10 +101,9 @@
       <ul class="right">
         <% if logged_in? %>
           <li class="has-dropdown">
-            <%= link_to "Hi, " + current_user.employee.first_name %>
+            <%= link_to "Hi, " + current_user.employee.first_name+"!" %>
             <ul class="dropdown">
               <li><%= link_to 'Edit Information', edit_employee_path(current_user.employee) %></li>
-              <li><%= link_to 'Edit Account', edit_user_path(current_user) %></li>
               <li><%= link_to 'Logout', logout_path %></li>
             </ul>
           </li>

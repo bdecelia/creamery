@@ -7,6 +7,8 @@ class HomeController < ApplicationController
   	@upcoming_shifts = Shift.upcoming.chronological.paginate(page: params[:page]).per_page(10)
     @today_shifts = Shift.today.chronological.paginate(page: params[:page]).per_page(10)
   	@active_flavors = Flavor.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    @active_employees = Employee.active.regulars.alphabetical.paginate(page: params[:page]).per_page(10)
+    @active_managers = Employee.active.managers.alphabetical.paginate(page: params[:page]).per_page(10)
   end
 
   def about
