@@ -3,6 +3,8 @@ class JobsController < ApplicationController
   before_action :check_login
 
   def index
+    @active_jobs = Job.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    @inactive_jobs = Job.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
   end
 
   def new
@@ -42,7 +44,7 @@ class JobsController < ApplicationController
 
   private
   def job_params
-    params.require(:job).permit()
+    params.require(:job).permit(:id, :name, :description, :active)
   end
 
   def set_job

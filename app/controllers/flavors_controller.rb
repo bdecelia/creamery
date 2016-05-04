@@ -3,6 +3,8 @@ class FlavorsController < ApplicationController
   before_action :check_login
 
   def index
+    @active_flavors = Flavor.active.alphabetical.paginate(page: params[:page]).per_page(10)
+    @inactive_flavors = Flavor.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
   end
 
   def new
@@ -18,7 +20,7 @@ class FlavorsController < ApplicationController
       # if saved to database
       flash[:notice] = "Successfully created flavor."
       redirect_to flavors_path
-
+    else
       # return to the 'new' form
       render action: 'new'
     end
@@ -42,7 +44,7 @@ class FlavorsController < ApplicationController
 
   private
   def flavor_params
-    params.require(:flavor).permit()
+    params.require(:flavor).permit(:id, :name, :active)
   end
 
   def set_flavor
