@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,16 +17,6 @@
     </div>
     <%= render :partial => "partials/nav" %>
 
-  <div id="login">
-    <% if logged_in? %>
-    <%= link_to 'Logout', logout_path %>
-    <br>[<%= current_user.proper_name %>:<%= current_user.role %>]
-  <% else %>
-    <%= link_to 'Login', login_path %>
-  <% end %>
-  </div>
-
-    
     <div class="row">
       <div class="small-12 columns" id="main_content">
         <%= render :partial => "partials/flash" %>
@@ -39,4 +30,5 @@
     </footer> 
     <%= javascript_include_tag "application" %>
   </body>
+
 </html>

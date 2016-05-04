@@ -33,6 +33,23 @@
         </li>
       </ul>
 
+      <!-- Login/Account Section-->
+      <ul class="right">
+        <% if logged_in? %>
+          <li class="has-dropdown">
+            <%= link_to "Hi, " + current_user.employee.first_name %>
+            <ul class="dropdown">
+              <li><%= link_to 'Account', current_user %></li>
+              <li><%= link_to 'Logout', logout_path %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Login', login_path %>
+          </li>
+        <% end %>
+      </ul>
+
     </section>
   </nav>
 </div>
