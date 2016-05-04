@@ -6,38 +6,107 @@
         <li><%= link_to "Home", home_path %></li>
 
         <!-- options for stores -->
-        <li class="has-dropdown">
-          <%= link_to "Stores", stores_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Store List", stores_path %></li>
-            <li><%= link_to "Add a Store", new_store_path %></li>
-          </ul>
-        </li>
+        <% if can? :create, Store %>
+          <li class="has-dropdown">
+            <%= link_to "Stores", stores_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Store List", stores_path %></li>
+              <li><%= link_to "Add a Store", new_store_path %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <% if logged_in? %>
+              <%= link_to "Stores", stores_path %>
+            <% else %>
+              <%= link_to "Our Stores", stores_path %>
+            <% end %>
+          </li>
+        <% end %>
 
         <!-- options for employees -->
-        <li class="has-dropdown">
-          <%= link_to "Employees", employees_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Employee List", employees_path %></li>
-            <li><%= link_to "Add an Employee", new_employee_path %></li>
-          </ul>
-        </li>
+        <% if can? :create, Employee %>
+          <li class="has-dropdown">
+            <%= link_to "Employees", employees_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Employee List", employees_path %></li>
+              <li><%= link_to "Add an Employee", new_employee_path %></li>
+            </ul>
+          </li>
+        <% elsif can? :read, Employee %>
+          <li>
+            <%= link_to "Employees", employees_path %>
+          </li>
+        <% end %>
 
         <!-- options for assignments -->
+        <% if can? :create, Assignment %>
+          <li class="has-dropdown">
+            <%= link_to "Assignments", assignments_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Assignment List", assignments_path %></li>
+              <li><%= link_to "Add an Assignment", new_assignment_path %></li>
+            </ul>
+          </li>
+        <% elsif can? :read, Assignment %>
+          <li>
+            <%= link_to "Assignments", assignments_path %>
+          </li>
+        <% end %>
+
+      <!-- options for shifts -->
+      <% if can? :create, Shift %>
+          <li class="has-dropdown">
+            <%= link_to "Shifts", shifts_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Shift List", shifts_path %></li>
+              <li><%= link_to "Add a Shift", new_shift_path %></li>
+            </ul>
+          </li>
+        <% elsif can? :read, Shift %>
+          <li>
+            <%= link_to "Shifts", shifts_path %>
+          </li>
+      <% end %>
+
+      <!-- options for jobs -->
+      <% if can? :create, Job %>
         <li class="has-dropdown">
-          <%= link_to "Assignments", assignments_path %>
+          <%= link_to "Jobs", jobs_path %>
           <ul class="dropdown">
-            <li><%= link_to "Assignments List", assignments_path %></li>
-            <li><%= link_to "Create New Assignment", new_assignment_path %></li>
+            <li><%= link_to "Jobs List", jobs_path %></li>
+            <li><%= link_to "Create New Job", new_job_path %></li>
           </ul>
         </li>
+      <% elsif can? :read, Job %>
+          <li>
+            <%= link_to "Jobs", jobs_path %>
+          </li>
+      <% end %>
+
+      <!-- options for flavors -->
+      <% if can? :create, Flavor %>
+          <li class="has-dropdown">
+            <%= link_to "Flavors", flavors_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Flavor List", flavors_path %></li>
+              <li><%= link_to "Add a Flavor", new_flavor_path %></li>
+            </ul>
+          </li>
+        <% elsif can? :read, Flavor %>
+          <li>
+            <%= link_to "Flavors", flavors_path %>
+          </li>
+      <% end %>
+
+
       </ul>
 
       <!-- Login/Account Section-->
       <ul class="right">
         <% if logged_in? %>
           <li class="has-dropdown">
-            <%= link_to "Hi, " + current_user.employee.first_name %>
+            <%= link_to "Hi, " + current_user.employee.first_name, current_user %>
             <ul class="dropdown">
               <li><%= link_to 'Account', current_user %></li>
               <li><%= link_to 'Logout', logout_path %></li>
@@ -45,7 +114,7 @@
           </li>
         <% else %>
           <li>
-            <%= link_to 'Login', login_path %>
+            <%= link_to 'Employee Login', login_path %>
           </li>
         <% end %>
       </ul>
