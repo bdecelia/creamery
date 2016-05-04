@@ -6,6 +6,10 @@ class ShiftsController < ApplicationController
 
   def index
     @upcoming_shifts = Shift.upcoming.chronological.paginate(page: params[:page]).per_page(10)
+    @my_upcoming = Shift.for_employee(current_user.employee.id).upcoming.paginate(page: params[:page]).per_page(10)
+    unless current_user.employee.current_assignment.store.nil?
+    @store_upcoming = Shift.for_store(current_user.employee.current_assignment.store.id).upcoming.paginate(page: params[:page]).per_page(10)
+  end
     @past_shifts = Shift.past.chronological.paginate(page: params[:page]).per_page(10)
     #@list ||= Assignment.current.to_a.each {|a| @list.push [a.proper_name, a]}
     #@list = Array.new(Assignment.current.to_a.length) dAssignment.each }

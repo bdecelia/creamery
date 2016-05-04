@@ -9,7 +9,9 @@
         <th width="225">Store Phone</th>
         <% if logged_in? %>
         <th width="125">Staff Count</th>
+        <% if can? :update, Store %>
         <th width="75">&nbsp;</th>
+        <% end %>
         <% end %>
       </tr>
     </thead>
@@ -20,12 +22,14 @@
           <td><%= link_to store.name, store_path(store) %></td>
           <td><%= number_to_phone store.phone %></td>
           <% if logged_in? %>
-          <td><%= store.assignments.current.count %></td>    
+          <td><%= store.assignments.current.count %></td>
+        <% if can? :update, store %>
           <td>
             <%= link_to(edit_store_path(store), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;
             <% end %>
           </td>
+          <% end %>
           <% end %>
         </tr>
         <% end %>
