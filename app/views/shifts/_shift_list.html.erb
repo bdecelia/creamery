@@ -1,4 +1,4 @@
-<% if shifts.empty? %>
+<% if shifts.nil? or shifts.empty? %>
   <p><em>There are no <%= state %> shifts at this time.</em></p>
 <% else %>
   <h3><%= state.capitalize %> Shifts</h3>

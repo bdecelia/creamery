@@ -1,7 +1,8 @@
 class ShiftsController < ApplicationController
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
   before_action :check_login
-  before_action(only: [:create, :destroy]) { deny_access(:employee) }
+  #before_action(only: [:create, :destroy]) { deny_access(:employee) }
+  authorize_resource
 
   def index
     @upcoming_shifts = Shift.upcoming.chronological.paginate(page: params[:page]).per_page(10)
@@ -19,7 +20,7 @@ class ShiftsController < ApplicationController
 
   def create
     @shift = Shift.new(shift_params)
-    if @shift.save
+    if @shift.save!
       # if saved to database
       flash[:notice] = "Successfully created shift."
       redirect_to shifts_path
