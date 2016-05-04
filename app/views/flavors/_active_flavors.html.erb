@@ -1,4 +1,4 @@
-<% if @active_flavors.empty? %>
+<% if @active_flavors.nil? or @active_flavors.empty? %>
   <p><em>There are no active flavors at this time.</em></p>
 <% else %>
   <h3>Current Flavors</h3>

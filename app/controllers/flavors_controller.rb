@@ -1,7 +1,8 @@
 class FlavorsController < ApplicationController
   before_action :set_flavor, only: [:show, :edit, :update, :destroy]
   before_action :check_login
-
+  before_action(only: [:create, :edit, :update, :destroy]) { deny_access(:employee) }
+  
   def index
     @active_flavors = Flavor.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @inactive_flavors = Flavor.inactive.alphabetical.paginate(page: params[:page]).per_page(10)

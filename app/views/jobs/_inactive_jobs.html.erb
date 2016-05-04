@@ -1,14 +1,12 @@
+<% if can? :update, Job %>
 <% unless @inactive_jobs.empty? %>
   <div class="panel callout radius">
     <h3>Inactive Jobs</h3>
     <ul>
       <% @inactive_jobs.each do |job| %>
-        <% if can? :update, Job %>
         <li><%= link_to job.name, job %></li>
-        <% else %>
-        <li><%= job.name %></li>
-      <% end %>
       <% end %>
     </ul>
   </div>
+<% end %>
 <% end %>

@@ -3,7 +3,9 @@
     <h3>Inactive Employees</h3>
     <ul>
       <% @inactive_employees.each do |employee| %>
+      <% if can? :read, employee %>
         <li><%= link_to employee.name, employee_path(employee) %></li>
+      <% end %>
       <% end %>
     </ul>
   </div>

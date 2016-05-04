@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_login
+  before_action(only: [:create, :destroy]) { deny_access(:employee) }
+  before_action(only: [:create, :destroy]) { deny_access(:employee) }
 
   def new
     @user = User.new

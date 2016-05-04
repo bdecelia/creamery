@@ -18,6 +18,7 @@ class Shift < ActiveRecord::Base
   scope :by_employee, -> { joins(:assignment, :employee).order('employees.last_name, employees.first_name') }
   scope :past, -> { where('date < ?', Date.current) }
   scope :upcoming, -> { where('date >= ?', Date.current) }
+  scope :today, -> { where('date == ?', Date.current) }
   scope :for_employee, ->(employee_id) { joins(:assignment, :employee).where("assignments.employee_id = ?", employee_id) }
   scope :for_store, ->(store_id) { joins(:assignment, :store).where("assignments.store_id = ?", store_id) }
   scope :for_next_days, ->(x) { where('date BETWEEN ? AND ?', Date.today, x.days.from_now.to_date) }

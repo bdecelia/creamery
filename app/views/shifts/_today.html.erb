@@ -1,0 +1,5 @@
+<% if @today_shifts.nil? or @today_shifts.empty? %>
+  <p><em>There are no shifts for today.</em></p>
+<% else %>
+  <%= render partial: "shifts/shift_list", locals: {shifts: @today_shifts, state: 'today'} %>
+<% end %>

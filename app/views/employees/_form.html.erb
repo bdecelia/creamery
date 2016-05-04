@@ -1,3 +1,4 @@
+<% if current_user.employee == @employee or @current_user.employee.role == "admin" %>
 <%= simple_form_for @employee, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Employee</legend>
@@ -23,4 +24,5 @@
       <%= link_to 'Cancel', employees_path, :class => 'button alert radius' %>
     </div>
   </fieldset>
+<% end %>
 <% end %>

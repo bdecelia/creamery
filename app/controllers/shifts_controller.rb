@@ -1,6 +1,7 @@
 class ShiftsController < ApplicationController
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
   before_action :check_login
+  before_action(only: [:create, :destroy]) { deny_access(:employee) }
 
   def index
     @upcoming_shifts = Shift.upcoming.chronological.paginate(page: params[:page]).per_page(10)

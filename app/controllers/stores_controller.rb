@@ -1,6 +1,8 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
   before_action :check_login, except: [:show, :index]
+  before_action(only: [:create, :edit, :update, :destroy]) { deny_access(:employee) }
+  before_action(only: [:create, :edit, :update, :destroy]) { deny_access(:manager) }
   
   def index
     @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)

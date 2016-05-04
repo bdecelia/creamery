@@ -1,14 +1,12 @@
+<% if can? :update, Flavor %>
 <% unless @inactive_flavors.empty? %>
   <div class="panel callout radius">
     <h3>Inactive Flavors</h3>
     <ul>
       <% @inactive_flavors.each do |flavor| %>
-        <% if can? :update, Flavor %>
         <li><%= link_to flavor.name, flavor %></li>
-        <% else %>
-        <li><%= flavor.name %></li>
-      <% end %>
       <% end %>
     </ul>
   </div>
+<% end %>
 <% end %>

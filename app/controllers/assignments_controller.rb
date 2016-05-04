@@ -2,6 +2,8 @@ class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:edit, :update, :destroy]
   # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   before_action :check_login
+  before_action(only: [:create, :edit, :update, :destroy]) { deny_access(:employee) }
+  before_action(only: [:create, :edit, :update, :destroy]) { deny_access(:manager) }
 
   def index
     @current_assignments = Assignment.current.by_store.by_employee.chronological.paginate(page: params[:page]).per_page(15)
