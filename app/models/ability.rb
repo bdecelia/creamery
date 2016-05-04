@@ -85,7 +85,7 @@ class Ability
       can :read, [Store, Job, Flavor]
 
       #can read or update their own employee info
-      can :read, Employee do |e|
+      can :show, Employee do |e|
         e.id == user.employee.id
       end
 
@@ -120,7 +120,7 @@ class Ability
 
     #guests can only read active store information
     can :read, Store do |s|
-      return s.active
+      s.active
     end
   end
 end

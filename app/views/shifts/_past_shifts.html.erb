@@ -1,0 +1,5 @@
+<% if @upcoming_shifts.empty? %>
+  <p><em>There are no past shifts at this time.</em></p>
+<% else %>
+  <%= render partial: "shift_list", locals: {shifts: @past_shifts, state: 'past'} %>
+<% end %>

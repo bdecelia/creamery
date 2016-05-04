@@ -20,7 +20,7 @@ class JobsController < ApplicationController
       # if saved to database
       flash[:notice] = "Successfully created job."
       redirect_to jobs_path
-
+    else
       # return to the 'new' form
       render action: 'new'
     end

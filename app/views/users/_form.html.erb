@@ -1,7 +1,7 @@
 <%= form_for @user do |f| %>
 	<% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this band from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
@@ -10,14 +10,6 @@
       </ul>
     </div>
   <% end %>
-	<p>
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </p>
   <p>
     <%= f.label :email, "Email Address" %><br />
     <%= f.text_field :email %>
@@ -30,13 +22,11 @@
     <%= f.label :password_confirmation, "Confirm Password" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
+  <% if can? :create, User %>
 	<p>
-    <%= f.label :role %><br />
-    <%= f.select :role, User::ROLES, :prompt => "Select ..." %>
+    <%= f.label :employee_id %><br />
+    <%= f.collection_select :employee_id, Employee.all, :id, :name, :prompt => "Choose..." %>
   </p>
-	<p>
-    <%= f.label :band_id %><br />
-    <%= f.collection_select :band_id, Band.all, :id, :name, :prompt => "Choose..." %>
-  </p>
+  <%end%>
   <p><%= f.submit (@user.new_record? ? "Sign up" : "Update") %></p>
 <% end %>

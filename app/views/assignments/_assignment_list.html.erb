@@ -12,11 +12,14 @@
         <% if state == 'past' %>
           <th>End Date</th>
         <% end %>
+        <% if can? :update, Assignment %>
         <th>&nbsp;</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% assignments.each do |assignment| %>
+      <% if can? :read, assignment %>
         <tr>
           <td><%= link_to assignment.store.name, store_path(assignment.store) %></td>
           <td><%= link_to assignment.employee.name, employee_path(assignment.employee) %></td>
@@ -25,12 +28,15 @@
           <% if state == 'past' %>
             <td><%= assignment.end_date.strftime("%m/%d/%y") %></td>
           <% end %>
+          <% if can? :update, assignment %>
           <td>
             <%= link_to(edit_assignment_path(assignment), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;
             <% end %>
           </td>
+          <% end %>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -1,4 +1,5 @@
 <% unless @inactive_stores.empty? %>
+<% if can? :read, @inactive_stores.first %>
   <div class="panel callout radius">
     <h3>Inactive Stores</h3>
     <ul>
@@ -7,4 +8,5 @@
       <% end %>
     </ul>
   </div>
+<% end %>
 <% end %>

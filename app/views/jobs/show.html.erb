@@ -1,1 +1,11 @@
-show.html.erb
+<div class="row">
+  <div class="small-7 columns">
+    <%= render partial: "job_details" %>
+  </div>
+  <div class="small-5 columns">
+    <%= render partial: "active jobs" unless @active_jobs.nil? or @active_jobs.empty? %>
+  </div>
+</div>
+
+<!-- Add buttons to list all, edit project or destroy object -->
+<%= render partial: "partials/object_options", locals: {model_name: "job", object: @job}  %>

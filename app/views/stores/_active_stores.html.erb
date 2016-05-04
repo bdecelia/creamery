@@ -13,16 +13,20 @@
     </thead>
     <tbody>
       <% @active_stores.each do |store| %>
+        <% if can? :read, store %>
         <tr>
           <td><%= link_to store.name, store_path(store) %></td>
           <td><%= number_to_phone store.phone %></td>
-          <td><%= store.assignments.current.count %></td>      
+          <td><%= store.assignments.current.count %></td> 
+          <% if can? :update, store %>     
           <td>
             <%= link_to(edit_store_path(store), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;
             <% end %>
           </td>
+          <% end %>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

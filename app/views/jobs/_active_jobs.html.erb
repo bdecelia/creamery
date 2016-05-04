@@ -1,0 +1,32 @@
+<% if @active_jobs.empty? %>
+  <p><em>There are no active jobs at this time.</em></p>
+<% else %>
+  <h3>Current Jobs</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Job Description</th>
+        <% if can? :update, Flavor %>
+        <th width="75">&nbsp;</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_jobs.each do |job| %>
+        <tr>
+          <td><%= job.name %></td>
+          <td><%= job.description %></td> 
+          <% if can? :update, Flavor %>     
+          <td>
+            <%= link_to(edit_job_path(job), class: 'button tiny radius warning') do %>
+              &nbsp;Edit&nbsp;
+            <% end %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @active_jobs, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %> <p>&nbsp;</p>
+<% end %>

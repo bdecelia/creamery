@@ -1,0 +1,25 @@
+<h3>Shift Details</h3>
+<br />
+<p>
+  <b>Store</b>: <%= link_to @shift.store.name, store_path(@shift.assignment.store) %>
+</p>
+
+<p>
+  <b>Employee</b>: <%= link_to @shift.assignment.employee.name, employee_path(@shift.assignment.employee) %>
+</p>
+
+<p>
+  <b>Date</b>: <%= @shift.date.strftime("%m/%d/%y") %>
+</p>
+
+<p>
+  <b>Start Time</b>:  <%= @shift.start_time %>
+</p>
+
+<p>
+  <b>End Time</b>:  <%= @shift.end_time %>
+</p>
+
+<p>
+  <b>Notes</b>: <%= @shift.notes %>
+</p>

@@ -28,7 +28,7 @@ class FlavorsController < ApplicationController
 
   def update
   	if @flavor.update(flavor_params)
-      redirect_to flavor_path(@flavor), notice: "Successfully updated #{@store.name}."
+      redirect_to flavor_path(@flavor), notice: "Successfully updated #{@flavor.name}."
     else
       render action: 'edit'
     end
